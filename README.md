@@ -1,6 +1,6 @@
 # Ecommerce Order Engine
 
-A production-style asynchronous ecommerce backend built with **Python**, **FastAPI**, **PostgreSQL**, **Redis**, **Celery**, and **Docker**.
+Designed using asynchronous event-driven architecture patterns with Celery workers and Redis queues to simulate scalable ecommerce order processing.
 
 This project is a production-style ecommerce backend system designed to demonstrate how scalable commerce platforms handle authentication, inventory management, asynchronous order processing, distributed task queues, caching, and business analytics in real-world environments.
 
