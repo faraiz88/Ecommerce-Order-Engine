@@ -1,8 +1,18 @@
 # Ecommerce Order Engine
 
-Designed using asynchronous event-driven architecture patterns with Celery workers and Redis queues to simulate scalable ecommerce order processing.
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
+![Redis](https://img.shields.io/badge/Redis-Queue-red)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
 
-This project is a production-style ecommerce backend system designed to demonstrate how scalable commerce platforms handle authentication, inventory management, asynchronous order processing, distributed task queues, caching, and business analytics in real-world environments.
+A production-style ecommerce backend built using asynchronous event-driven architecture patterns with FastAPI, Celery, Redis, PostgreSQL, and Docker to simulate how scalable commerce platforms handle authentication, inventory synchronization, distributed task processing, caching, and business analytics in real-world environments.
+
+---
+
+# 📌 Purpose
+
+This project was built to demonstrate production-grade backend engineering concepts commonly used in scalable ecommerce systems, including asynchronous workflows, distributed task queues, caching strategies, inventory consistency handling, analytics aggregation, and containerized deployment architecture.
 
 ---
 
@@ -26,10 +36,11 @@ This project is a production-style ecommerce backend system designed to demonstr
 ---
 
 ## Async Order Processing
-- Orders processed in background using Celery
+- Orders processed asynchronously using Celery workers
 - Redis queue integration
-- Async stock handling
-- Retry mechanism for failures
+- Background task execution
+- Retry mechanism for failed tasks
+- Inventory synchronization handling
 - Order lifecycle tracking:
   - `PENDING`
   - `CONFIRMED`
@@ -48,29 +59,42 @@ Business intelligence endpoints for:
 ---
 
 ## Production Features
-- Dockerized architecture
+- Dockerized multi-service architecture
 - Structured logging
-- Global error handling
+- Global exception handling
+- Environment-based configuration
 - Seed data script
 - Swagger API documentation
-- Health check endpoint
+- Health monitoring endpoint
 
 ---
 
-# 🧠 Final Architecture
+# 🧠 System Architecture
 
 ```text
-Client
-↓
-FastAPI API Layer
-↓
-PostgreSQL Database
-↓
-Redis (Queue + Cache)
-↓
-Celery Workers
-↓
-Analytics Layer
+                +------------------+
+                |      Client      |
+                +------------------+
+                          |
+                          v
+                +------------------+
+                |   FastAPI API    |
+                +------------------+
+                   |           |
+                   v           v
+         +---------------+   +---------------+
+         | PostgreSQL DB |   | Redis Queue   |
+         +---------------+   +---------------+
+                                      |
+                                      v
+                             +----------------+
+                             | Celery Worker  |
+                             +----------------+
+                                      |
+                                      v
+                             +----------------+
+                             | Analytics Layer|
+                             +----------------+
 ```
 
 ---
@@ -114,6 +138,14 @@ Ecommerce-Order-Engine/
 ├── README.md
 └── .env
 ```
+
+---
+
+# ✅ Requirements
+
+- Docker
+- Docker Compose
+- Python 3.11+
 
 ---
 
@@ -208,30 +240,30 @@ http://localhost:8000/docs
 
 ```text
 User places order
-↓
+        ↓
 Order stored as PENDING
-↓
-Task sent to Redis queue
-↓
-Celery worker processes order
-↓
+        ↓
+Task pushed to Redis queue
+        ↓
+Celery worker consumes task
+        ↓
 Inventory validated
-↓
+        ↓
 Stock deducted
-↓
-Order CONFIRMED or FAILED
+        ↓
+Order marked CONFIRMED or FAILED
 ```
 
 ---
 
 # 📊 Analytics Capabilities
 
-The analytics layer provides:
+The analytics engine provides:
 - Revenue aggregation
 - Product sales metrics
 - Time-based order tracking
 - Failure monitoring
-- Redis caching for performance
+- Redis caching for improved performance
 
 ---
 
@@ -263,7 +295,7 @@ Response:
 
 # 🔐 Authentication
 
-Protected routes use JWT Bearer tokens.
+Protected routes use JWT Bearer authentication.
 
 After login:
 
@@ -281,21 +313,8 @@ inside Swagger UI.
 |---|---|
 | api | FastAPI backend |
 | db | PostgreSQL database |
-| redis | Redis queue/cache |
-| worker | Celery worker |
-
----
-
-# 📈 Skills Demonstrated
-
-- Backend API development
-- Asynchronous systems
-- Queue-based architectures
-- Inventory management
-- Database modeling
-- Analytics aggregation
-- Docker containerization
-- Production-ready backend design
+| redis | Redis queue & caching |
+| worker | Celery background worker |
 
 ---
 
@@ -310,6 +329,12 @@ Phase 5 — Async Processing ✅
 Phase 6 — Analytics Engine ✅
 Phase 7 — Productionization ✅
 ```
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
 
 ---
 
