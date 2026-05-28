@@ -65,7 +65,7 @@ Business intelligence endpoints for:
 - Environment-based configuration
 - Seed data script
 - Swagger API documentation
-- Health monitoring endpoint
+- Health check endpoint
 
 ---
 
@@ -154,7 +154,7 @@ Ecommerce-Order-Engine/
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ecommerce-order-engine.git
+git clone https://github.com/faraiz88/Ecommerce-Order-Engine.git
 cd ecommerce-order-engine
 ```
 
