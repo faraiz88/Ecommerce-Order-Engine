@@ -179,7 +179,7 @@ REDIS_URL=redis://redis:6379/0
 ```bash
 docker compose up --build
 
-```
+---
 
 # 🌐 Deployment
 
