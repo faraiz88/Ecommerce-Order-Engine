@@ -180,6 +180,22 @@ REDIS_URL=redis://redis:6379/0
 docker compose up --build
 ```
 
+# 🌐 Deployment
+
+Live API deployment:
+
+```text
+https://ecommerce-order-engine-production.up.railway.app
+```
+
+Swagger Documentation:
+
+```text
+https://ecommerce-order-engine-production.up.railway.app/docs
+```
+
+Deployed using Railway with Docker-based containerization.
+
 ---
 
 # 📘 API Documentation
