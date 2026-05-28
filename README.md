@@ -6,70 +6,58 @@
 ![Redis](https://img.shields.io/badge/Redis-Queue-red)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
 
-A production-style ecommerce backend built using asynchronous event-driven architecture patterns with FastAPI, Celery, Redis, PostgreSQL, and Docker to simulate how scalable commerce platforms handle authentication, inventory synchronization, distributed task processing, caching, and business analytics in real-world environments.
+Production-style ecommerce backend built with FastAPI, PostgreSQL, Redis, Celery, and Docker using asynchronous event-driven architecture patterns for scalable order processing, inventory synchronization, caching, and analytics.
 
 ---
 
-# 📌 Purpose
+## 🚀 Features
 
-This project was built to demonstrate production-grade backend engineering concepts commonly used in scalable ecommerce systems, including asynchronous workflows, distributed task queues, caching strategies, inventory consistency handling, analytics aggregation, and containerized deployment architecture.
+### Authentication & Authorization
 
----
+* JWT-based authentication
+* User registration & login
+* Role-based access control
+* Admin-protected product operations
 
-# 🚀 Features
+### Product & Inventory System
 
-## Authentication & Authorization
-- JWT-based authentication
-- User registration & login
-- Role-based access control
-- Admin-only product management
+* Product CRUD & inventory management
+* Real-time stock validation and deduction
+* Protected admin routes
 
----
+### Async Order Processing
 
-## Product & Inventory System
-- Product CRUD APIs
-- Inventory management
-- Stock validation
-- Real-time stock deduction
-- Protected admin routes
+* Celery worker-based background processing
+* Redis queue integration
+* Retry handling for failed tasks
+* Inventory synchronization
+* Order lifecycle tracking:
 
----
+  * `PENDING`
+  * `CONFIRMED`
+  * `FAILED`
 
-## Async Order Processing
-- Orders processed asynchronously using Celery workers
-- Redis queue integration
-- Background task execution
-- Retry mechanism for failed tasks
-- Inventory synchronization handling
-- Order lifecycle tracking:
-  - `PENDING`
-  - `CONFIRMED`
-  - `FAILED`
+### Analytics Engine
 
----
+* Revenue tracking
+* Top-selling products
+* Orders-by-day aggregation
+* Failure-rate monitoring
+* Redis-cached analytics endpoints
 
-## Analytics Engine
-Business intelligence endpoints for:
-- Revenue tracking
-- Top-selling products
-- Orders by day
-- Failure-rate monitoring
-- Cached analytics using Redis
+### Production Features
 
----
-
-## Production Features
-- Dockerized multi-service architecture
-- Structured logging
-- Global exception handling
-- Environment-based configuration
-- Seed data script
-- Swagger API documentation
-- Health check endpoint
+* Dockerized multi-service architecture
+* Structured logging
+* Global exception handling
+* Environment-based configuration
+* Seed data script
+* Swagger API documentation
+* Health check endpoint
 
 ---
 
-# 🧠 System Architecture
+## 🧠 System Architecture
 
 ```text
                 +------------------+
@@ -99,23 +87,23 @@ Business intelligence endpoints for:
 
 ---
 
-# 🛠 Tech Stack
+## 🛠 Tech Stack
 
-| Technology | Purpose |
-|---|---|
-| Python | Core programming language |
-| FastAPI | API framework |
-| PostgreSQL | Relational database |
-| SQLAlchemy | ORM |
-| Redis | Queue + caching |
-| Celery | Background task processing |
-| Docker | Containerization |
-| JWT | Authentication |
-| Pydantic | Validation & schemas |
+| Technology | Purpose                    |
+| ---------- | -------------------------- |
+| Python     | Core programming language  |
+| FastAPI    | API framework              |
+| PostgreSQL | Relational database        |
+| SQLAlchemy | ORM                        |
+| Redis      | Queue & caching            |
+| Celery     | Background task processing |
+| Docker     | Containerization           |
+| JWT        | Authentication             |
+| Pydantic   | Validation & schemas       |
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
 ```text
 Ecommerce-Order-Engine/
@@ -141,26 +129,24 @@ Ecommerce-Order-Engine/
 
 ---
 
-# ✅ Requirements
+## ✅ Requirements
 
-- Docker
-- Docker Compose
-- Python 3.11+
+* Docker
+* Docker Compose
+* Python 3.11+
 
 ---
 
-# ⚡ Quick Start
+## ⚡ Quick Start
 
-## 1. Clone Repository
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/faraiz88/Ecommerce-Order-Engine.git
 cd ecommerce-order-engine
 ```
 
----
-
-## 2. Create `.env`
+### 2. Create `.env`
 
 ```env
 DATABASE_URL=postgresql://username:password@db:5432/ecommerce_db
@@ -172,25 +158,23 @@ ALGORITHM=HS256
 REDIS_URL=redis://redis:6379/0
 ```
 
----
-
-## 3. Run Entire System
+### 3. Run the System
 
 ```bash
 docker compose up --build
-
 ```
+
 ---
 
-# 🌐 Deployment
+## 🌐 Deployment
 
-Live API deployment:
+### Live API
 
 ```text
 https://ecommerce-order-engine-production.up.railway.app
 ```
 
-Swagger Documentation:
+### Swagger Documentation
 
 ```text
 https://ecommerce-order-engine-production.up.railway.app/docs
@@ -200,9 +184,9 @@ Deployed using Railway with Docker-based containerization.
 
 ---
 
-# 📘 API Documentation
+## 📘 API Documentation
 
-Swagger UI:
+### Local Swagger UI
 
 ```text
 http://localhost:8000/docs
@@ -210,51 +194,45 @@ http://localhost:8000/docs
 
 ---
 
-# ❤️ Core API Endpoints
+## ❤️ Core API Endpoints
 
-## Authentication
+### Authentication
 
-| Method | Endpoint |
-|---|---|
-| POST | `/auth/register` |
-| POST | `/auth/login` |
+| Method | Endpoint         |
+| ------ | ---------------- |
+| POST   | `/auth/register` |
+| POST   | `/auth/login`    |
 
----
+### Products
 
-## Products
+| Method | Endpoint               |
+| ------ | ---------------------- |
+| GET    | `/products`            |
+| GET    | `/products/{id}`       |
+| POST   | `/products`            |
+| PUT    | `/products/{id}`       |
+| PATCH  | `/products/{id}/stock` |
 
-| Method | Endpoint |
-|---|---|
-| GET | `/products` |
-| GET | `/products/{id}` |
-| POST | `/products` |
-| PUT | `/products/{id}` |
-| PATCH | `/products/{id}/stock` |
+### Orders
 
----
+| Method | Endpoint            |
+| ------ | ------------------- |
+| POST   | `/orders`           |
+| GET    | `/orders/{id}`      |
+| GET    | `/orders/my-orders` |
 
-## Orders
+### Analytics
 
-| Method | Endpoint |
-|---|---|
-| POST | `/orders` |
-| GET | `/orders/{id}` |
-| GET | `/orders/my-orders` |
-
----
-
-## Analytics
-
-| Method | Endpoint |
-|---|---|
-| GET | `/analytics/summary` |
-| GET | `/analytics/top-products` |
-| GET | `/analytics/orders-by-day` |
-| GET | `/analytics/failure-rate` |
+| Method | Endpoint                   |
+| ------ | -------------------------- |
+| GET    | `/analytics/summary`       |
+| GET    | `/analytics/top-products`  |
+| GET    | `/analytics/orders-by-day` |
+| GET    | `/analytics/failure-rate`  |
 
 ---
 
-# 🔄 Order Processing Flow
+## 🔄 Order Processing Flow
 
 ```text
 User places order
@@ -274,20 +252,7 @@ Order marked CONFIRMED or FAILED
 
 ---
 
-# 📊 Analytics Capabilities
-
-The analytics engine provides:
-- Revenue aggregation
-- Product sales metrics
-- Time-based order tracking
-- Failure monitoring
-- Redis caching for improved performance
-
----
-
-# 🧪 Seed Demo Data
-
-Run:
+## 🧪 Seed Demo Data
 
 ```bash
 docker compose exec api python -m scripts.seed
@@ -295,7 +260,7 @@ docker compose exec api python -m scripts.seed
 
 ---
 
-# 🩺 Health Check
+## 🩺 Health Check
 
 ```http
 GET /health
@@ -311,7 +276,7 @@ Response:
 
 ---
 
-# 🔐 Authentication
+## 🔐 Authentication
 
 Protected routes use JWT Bearer authentication.
 
@@ -325,23 +290,23 @@ inside Swagger UI.
 
 ---
 
-# 🐳 Docker Services
+## 🐳 Docker Services
 
-| Service | Description |
-|---|---|
-| api | FastAPI backend |
-| db | PostgreSQL database |
-| redis | Redis queue & caching |
-| worker | Celery background worker |
+| Service | Description              |
+| ------- | ------------------------ |
+| api     | FastAPI backend          |
+| db      | PostgreSQL database      |
+| redis   | Redis queue & caching    |
+| worker  | Celery background worker |
 
 ---
 
-# 📄 License
+## 📄 License
 
 This project is licensed under the MIT License.
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
 Mohammed Faraiz
