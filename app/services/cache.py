@@ -1,10 +1,10 @@
-import redis
 import json
+import redis
+from os import getenv
 
 
-client = redis.Redis(
-    host="redis",
-    port=6379,
+client = redis.Redis.from_url(
+    getenv("REDIS_URL"),
     decode_responses=True
 )
 
