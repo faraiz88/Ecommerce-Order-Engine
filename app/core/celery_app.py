@@ -1,16 +1,16 @@
 from celery import Celery
+from os import getenv
 
+REDIS_URL = getenv("REDIS_URL")
 
 celery = Celery(
     "ecommerce",
-    broker="redis://redis:6379/0",
-    backend="redis://redis:6379/0",
-
+    broker=REDIS_URL,
+    backend=REDIS_URL,
     include=[
         "app.tasks.order_tasks"
     ]
 )
-
 
 celery.conf.update(
     task_serializer="json",
