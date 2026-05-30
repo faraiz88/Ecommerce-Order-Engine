@@ -2,15 +2,12 @@
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
-![Redis](https://img.shields.io/badge/Redis-Queue-red)
-![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
 
-Production-style ecommerce backend built with FastAPI, PostgreSQL, Redis, Celery, and Docker using asynchronous event-driven architecture patterns for scalable order processing, inventory synchronization, caching, and analytics.
+Ecommerce backend built with FastAPI, PostgreSQL, Redis, Celery, and Docker using asynchronous event-driven architecture patterns for scalable order processing, inventory synchronization, caching, and analytics.
 
 ---
 
-## 🚀 Features
+## Features
 
 ### Authentication & Authorization
 
@@ -31,11 +28,7 @@ Production-style ecommerce backend built with FastAPI, PostgreSQL, Redis, Celery
 * Redis queue integration
 * Retry handling for failed tasks
 * Inventory synchronization
-* Order lifecycle tracking:
-
-  * `PENDING`
-  * `CONFIRMED`
-  * `FAILED`
+* Order lifecycle tracking: `PENDING` → `CONFIRMED` → `FAILED`
 
 ### Analytics Engine
 
@@ -45,7 +38,7 @@ Production-style ecommerce backend built with FastAPI, PostgreSQL, Redis, Celery
 * Failure-rate monitoring
 * Redis-cached analytics endpoints
 
-### Production Features
+### Other Features
 
 * Dockerized multi-service architecture
 * Structured logging
@@ -53,11 +46,10 @@ Production-style ecommerce backend built with FastAPI, PostgreSQL, Redis, Celery
 * Environment-based configuration
 * Seed data script
 * Swagger API documentation
-* Health check endpoint
 
 ---
 
-## 🧠 System Architecture
+## System Architecture
 
 ```text
                 +------------------+
@@ -87,7 +79,7 @@ Production-style ecommerce backend built with FastAPI, PostgreSQL, Redis, Celery
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Technology | Purpose                    |
 | ---------- | -------------------------- |
@@ -103,7 +95,7 @@ Production-style ecommerce backend built with FastAPI, PostgreSQL, Redis, Celery
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 Ecommerce-Order-Engine/
@@ -129,7 +121,7 @@ Ecommerce-Order-Engine/
 
 ---
 
-## ✅ Requirements
+## Requirements
 
 * Docker
 * Docker Compose
@@ -137,7 +129,7 @@ Ecommerce-Order-Engine/
 
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
 ### 1. Clone Repository
 
@@ -150,11 +142,8 @@ cd ecommerce-order-engine
 
 ```env
 DATABASE_URL=postgresql://username:password@db:5432/ecommerce_db
-
 SECRET_KEY=your_secret_key
-
 ALGORITHM=HS256
-
 REDIS_URL=redis://redis:6379/0
 ```
 
@@ -164,37 +153,31 @@ REDIS_URL=redis://redis:6379/0
 docker compose up --build
 ```
 
----
+### 4. Seed Demo Data
 
-## 🌐 Deployment
-
-### Live API
-
-```text
-https://ecommerce-order-engine-production.up.railway.app
+```bash
+docker compose exec api python -m scripts.seed
 ```
 
-### Swagger Documentation
+### 5. Health Check
 
-```text
-https://ecommerce-order-engine-production.up.railway.app/docs
 ```
-
-Deployed using Railway with Docker-based containerization.
-
----
-
-## 📘 API Documentation
-
-### Local Swagger UI
-
-```text
-http://localhost:8000/docs
+GET /health  →  { "status": "ok" }
 ```
 
 ---
 
-## ❤️ Core API Endpoints
+## Deployment
+
+**Live API:** `https://ecommerce-order-engine-production.up.railway.app`
+
+**Swagger Docs:** `https://ecommerce-order-engine-production.up.railway.app/docs`
+
+Deployed on Railway with Docker-based containerization. Local Swagger UI available at `http://localhost:8000/docs`.
+
+---
+
+## API Endpoints
 
 ### Authentication
 
@@ -202,6 +185,8 @@ http://localhost:8000/docs
 | ------ | ---------------- |
 | POST   | `/auth/register` |
 | POST   | `/auth/login`    |
+
+Protected routes use JWT Bearer tokens. After login, use `Authorize → Bearer <token>` in Swagger UI.
 
 ### Products
 
@@ -232,7 +217,7 @@ http://localhost:8000/docs
 
 ---
 
-## 🔄 Order Processing Flow
+## Order Processing Flow
 
 ```text
 User places order
@@ -252,61 +237,20 @@ Order marked CONFIRMED or FAILED
 
 ---
 
-## 🧪 Seed Demo Data
+## Known Limitations / Planned
 
-```bash
-docker compose exec api python -m scripts.seed
-```
-
----
-
-## 🩺 Health Check
-
-```http
-GET /health
-```
-
-Response:
-
-```json
-{
-  "status": "ok"
-}
-```
+* No payment gateway integration yet
+* Celery beat not configured for scheduled/recurring tasks
+* No email notifications on order status changes
 
 ---
 
-## 🔐 Authentication
+## License
 
-Protected routes use JWT Bearer authentication.
-
-After login:
-
-```text
-Authorize → Bearer <token>
-```
-
-inside Swagger UI.
+MIT License
 
 ---
 
-## 🐳 Docker Services
-
-| Service | Description              |
-| ------- | ------------------------ |
-| api     | FastAPI backend          |
-| db      | PostgreSQL database      |
-| redis   | Redis queue & caching    |
-| worker  | Celery background worker |
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
+## Author
 
 Mohammed Faraiz
