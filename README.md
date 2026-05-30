@@ -237,14 +237,6 @@ Order marked CONFIRMED or FAILED
 
 ---
 
-## Known Limitations / Planned
-
-* No payment gateway integration yet
-* Celery beat not configured for scheduled/recurring tasks
-* No email notifications on order status changes
-
----
-
 ## License
 
 MIT License
